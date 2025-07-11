@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROOT COIN</title>
+    <style>
+        :root {
+            --earth-dark: #0a0a08;
+            --earth-crack: #2a2218;
+            --root-color: #3a5c40;
+            --root-glow: #5d8c6b;
+            --coin-glow: #d4af37;
+            --text-faint: rgba(210, 210, 210, 0.15);
+            --twitter-blue: #1da1f2;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            user-select: none;
+        }
+        
+        body {
+            background-color: var(--earth-dark);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Header */
+        #header {
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--earth-crack);
+            background: var(--earth-dark);
+        }
+        
+        #main-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--coin-glow);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        #subtitle {
+            font-size: 0.9rem;
+            color: var(--root-glow);
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        #social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .social-link {
+            color: var(--twitter-blue);
+            text-decoration: none;
+            padding: 5px 12px;
+            border: 1px solid var(--twitter-blue);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .social-link:hover {
+            background-color: var(--twitter-blue);
+            color: white;
+        }
+        
+        #contract-address {
+            background-color: var(--earth-crack);
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: 1px solid var(--root-color);
+            font-size: 0.8rem;
+            color: var(--root-glow);
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        .ca-label {
+            color: var(--text-faint);
+            font-size: 0.7rem;
+            margin-bottom: 3px;
+        }
+        
+        .ca-value {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--coin-glow);
+            word-break: break-all;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-size: 0.85rem;
+        }
+        
+        .ca-value:hover {
+            color: white;
+        }
+        
+        /* Main Interface */
+        #main-interface {
+            display: grid;
+            height: calc(100vh - 200px);
+            width: 100vw;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 20px;
+        }
+        
+        .panel {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            border: 1px solid var(--text-faint);
+            border-radius: 5px;
+        }
+        
+        /* Left Panel - The Soil */
+        #left-panel {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .scripture {
+            color: var(--text-faint);
+            margin-bottom: 40px;
+            position: relative;
+            padding: 10px;
+            transition: color 0.5s, text-shadow 0.5s;
+            cursor: default;
+        }
+        
+        .scripture:hover {
+            color: var(--root-glow);
+            text-shadow: 0 0 5px var(--root-glow);
+        }
+        
+        .scripture:hover::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background-color: var(--root-glow);
+            box-shadow: 0 0 5px var(--root-glow);
+            border-radius: 5px;
+            animation: rootPulse 1.5s infinite;
+        }
+        
+        @keyframes rootPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        /* Center Panel - The Coin Emerges */
+        #center-panel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #coin-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #earth-surface {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, #1a120b, #3a2a1a);
+            z-index: 1;
+        }
+        
+        #main-coin {
+            position: absolute;
+            width: 500px;
+            height: 750px;
+            background-image: url('a.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            filter: drop-shadow(0 0 10px var(--coin-glow));
+        }
+        
+        .dust-particle {
+            position: absolute;
+            background-color: rgba(210, 180, 140, 0.7);
+            border-radius: 50%;
+            z-index: 3;
+        }
+        
+        /* Right Panel - The Data Tree */
+        #right-panel {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .data-item {
+            margin-bottom: 30px;
+        }
+        
+        .data-label {
+            color: var(--text-faint);
+            font-size: 0.8em;
+            margin-bottom: 5px;
+        }
+        
+        .data-value {
+            color: var(--root-glow);
+            font-size: 1.2em;
+        }
+        
+        #root-meter {
+            height: 20px;
+            width: 100%;
+            background-color: var(--earth-dark);
+            border: 1px solid var(--earth-crack);
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        #root-progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, var(--earth-crack), var(--root-color));
+            transition: width 1s;
+        }
+        
+        #root-canvas {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+            border: 1px solid var(--earth-crack);
+            cursor: crosshair;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            #main-interface {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                height: auto;
+            }
+            
+            #main-title {
+                font-size: 2em;
+            }
+            
+            #social-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .panel {
+                height: 400px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">
+        <h1 id="main-title">ROOT COIN</h1>
+        <p id="subtitle">Not mined—grown. Not held—cultivated.</p>
+        
+        <div id="social-links">
+            <a href="https://twitter.com/rootcoin" class="social-link" target="_blank">Twitter</a>
+        </div>
+        
+        <div id="contract-address">
+            <div class="ca-label">Contract Address:</div>
+            <div class="ca-value" onclick="copyToClipboard(this.textContent)" title="Click to copy">
+                HERE
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Interface -->
+    <div id="main-interface">
+        <!-- Left Panel - The Soil -->
+        <div class="panel" id="left-panel">
+            <div class="scripture">Before token, there was truth. Root it.</div>
+            <div class="scripture">The first root remembers what the last leaf forgets.</div>
+            <div class="scripture">Not mined—grown. Not held—cultivated.</div>
+            <div class="scripture">Value sleeps in the dark earth. Wake it slowly.</div>
+            <div class="scripture">The network is mycelium. The coin is its fruit.</div>
+            <div class="scripture">Your wallet is shallow soil. Dig deeper.</div>
+            <div class="scripture">Blockchains break. Rootchains remember.</div>
+            <div class="scripture">The algorithm flowers but the root is silent.</div>
+            <div class="scripture">One coin, many roots. One root, many coins.</div>
+            <div class="scripture">They will say it's magic. Show them the roots.</div>
+        </div>
+        
+        <!-- Center Panel - The Coin Emerges -->
+        <div class="panel" id="center-panel">
+            <div id="coin-container">
+                <div id="earth-surface"></div>
+                <div id="main-coin"></div>
+                <!-- Dust particles will be generated dynamically -->
+            </div>
+        </div>
+        
+        <!-- Right Panel - The Data Tree -->
+        <div class="panel" id="right-panel">
+            <div class="data-item">
+                <div class="data-label">Time since first root broke the ground</div>
+                <div class="data-value" id="time-since-root">00:00:00</div>
+            </div>
+            
+            <div class="data-item">
+                <div class="data-label">Percentage of coin unearthed</div>
+                <div class="data-value" id="unearthed-percent">0%</div>
+                <div id="root-meter">
+                    <div id="root-progress"></div>
+                </div>
+            </div>
+            
+            <div class="data-item">
+                <div class="data-label">Last Root Pulse</div>
+                <div class="data-value" id="last-root-pulse">--:--:--</div>
+            </div>
+            
+            <canvas id="root-canvas"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                // Visual feedback
+                const element = document.querySelector('.ca-value');
+                const originalText = element.textContent;
+                element.textContent = 'Copied!';
+                element.style.color = 'var(--coin-glow)';
+                
+                setTimeout(() => {
+                    element.textContent = originalText;
+                    element.style.color = 'var(--coin-glow)';
+                }, 1000);
+            }).catch(function() {
+                console.log('Copy failed');
+            });
+        }
+        
+        // Main Interface Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            initMainInterface();
+        });
+        
+        function initMainInterface() {
+            const mainCoin = document.getElementById('main-coin');
+            const coinContainer = document.getElementById('coin-container');
+            const earthSurface = document.getElementById('earth-surface');
+            const timeSinceRoot = document.getElementById('time-since-root');
+            const unearthedPercent = document.getElementById('unearthed-percent');
+            const rootProgress = document.getElementById('root-progress');
+            const lastRootPulse = document.getElementById('last-root-pulse');
+            const rootCanvas = document.getElementById('root-canvas');
+            const ctx = rootCanvas.getContext('2d');
+            
+            // Set canvas dimensions
+            function resizeCanvas() {
+                rootCanvas.width = rootCanvas.offsetWidth;
+                rootCanvas.height = rootCanvas.offsetHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Create dust particles
+            function createDustParticles() {
+                const containerWidth = coinContainer.offsetWidth;
+                const containerHeight = coinContainer.offsetHeight;
+                
+                for (let i = 0; i < 30; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'dust-particle';
+                    
+                    const size = 1 + Math.random() * 3;
+                    const left = Math.random() * containerWidth;
+                    const bottom = 10 + Math.random() * 100;
+                    const opacity = 0.2 + Math.random() * 0.5;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${left}px`;
+                    particle.style.bottom = `${bottom}px`;
+                    particle.style.opacity = `${opacity}`;
+                    
+                    coinContainer.appendChild(particle);
+                    
+                    // Animate particle
+                    animateParticle(particle);
+                }
+            }
+            
+            function animateParticle(particle) {
+                const duration = 3000 + Math.random() * 7000;
+                const distance = 50 + Math.random() * 100;
+                const angle = Math.random() * 360;
+                const xChange = Math.sin(angle * Math.PI / 180) * distance;
+                const yChange = Math.cos(angle * Math.PI / 180) * distance;
+                
+                const startLeft = parseFloat(particle.style.left);
+                const startBottom = parseFloat(particle.style.bottom);
+                
+                particle.style.transition = `all ${duration}ms linear`;
+                
+                setTimeout(() => {
+                    particle.style.left = `${startLeft + xChange}px`;
+                    particle.style.bottom = `${startBottom + yChange}px`;
+                    particle.style.opacity = '0';
+                    
+                    // Reset particle after animation
+                    setTimeout(() => {
+                        particle.style.transition = 'none';
+                        particle.style.left = `${startLeft}px`;
+                        particle.style.bottom = `${startBottom}px`;
+                        particle.style.opacity = particle.style.opacity;
+                        setTimeout(() => {
+                            particle.style.transition = `all ${duration}ms linear`;
+                            animateParticle(particle);
+                        }, 50);
+                    }, duration);
+                }, 50);
+            }
+            
+            // Handle scroll to raise coin
+            let lastScrollPosition = 0;
+            let coinPosition = -100;
+            let unearthed = 0;
+            
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY || window.pageYOffset;
+                const scrollDelta = scrollPosition - lastScrollPosition;
+                
+                // Only update if scrolling down
+                if (scrollDelta > 0) {
+                    coinPosition = Math.min(coinPosition + scrollDelta * 0.1, 100);
+                    unearthed = Math.min(coinPosition + 100, 100);
+                    
+                    mainCoin.style.bottom = `${-100 + coinPosition}px`;
+                    earthSurface.style.height = `${100 - coinPosition * 0.5}%`;
+                    
+                    // Update unearthed percentage
+                    unearthedPercent.textContent = `${Math.floor(unearthed)}%`;
+                    rootProgress.style.width = `${unearthed}%`;
+                }
+                
+                lastScrollPosition = scrollPosition;
+            });
+            
+            // Update time since root
+            let rootStartTime = new Date();
+            
+            function updateRootTime() {
+                const now = new Date();
+                const diff = now - rootStartTime;
+                
+                const hours = Math.floor(diff / 3600000);
+                const minutes = Math.floor((diff % 3600000) / 60000);
+                const seconds = Math.floor((diff % 60000) / 1000);
+                
+                timeSinceRoot.textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            setInterval(updateRootTime, 1000);
+            
+            // Simulate root pulse updates
+            function simulateRootPulse() {
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                const seconds = now.getSeconds().toString().padStart(2, '0');
+                
+                lastRootPulse.textContent = `${hours}:${minutes}:${seconds}`;
+                
+                // Random next pulse between 5-30 seconds
+                const nextPulse = 5000 + Math.random() * 25000;
+                setTimeout(simulateRootPulse, nextPulse);
+            }
+            
+            setTimeout(simulateRootPulse, 3000);
+            
+            // Interactive root canvas
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+            let hue = 120;
+            let direction = true;
+            
+            function draw(e) {
+                if (!isDrawing) return;
+                
+                ctx.strokeStyle = `hsl(${hue}, 80%, 50%)`;
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+                
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+                
+                // Change color gradually
+                hue = (hue + 0.5) % 360;
+                
+                // Change line width
+                if (ctx.lineWidth >= 5 || ctx.lineWidth <= 1) {
+                    direction = !direction;
+                }
+                
+                if (direction) {
+                    ctx.lineWidth += 0.1;
+                } else {
+                    ctx.lineWidth -= 0.1;
+                }
+            }
+            
+            rootCanvas.addEventListener('mousedown', (e) => {
+                isDrawing = true;
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            });
+            
+            rootCanvas.addEventListener('mousemove', draw);
+            rootCanvas.addEventListener('mouseup', () => isDrawing = false);
+            rootCanvas.addEventListener('mouseout', () => isDrawing = false);
+            
+            // Clear canvas on double click
+            rootCanvas.addEventListener('dblclick', () => {
+                ctx.clearRect(0, 0, rootCanvas.width, rootCanvas.height);
+            });
+            
+            // Initialize dust particles
+            createDustParticles();
+            
+            // Initial scroll position update
+            window.dispatchEvent(new Event('scroll'));
+        }
+    </script>
+</body>
+</html>
